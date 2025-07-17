@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApplicationCore.Models
 {
@@ -14,8 +15,9 @@ namespace ApplicationCore.Models
         [Required]
         public bool IsActive { get; set; }
         public int ServiceCategoryId { get; set; }
-        public ServiceCategory ServiceCategory { get; set; }
-        public ICollection<Project> Projects { get; set; }
+        [NotMapped]
+        public ServiceCategory ServiceCategory { get; set; } = new ServiceCategory();
+        public ICollection<Project> Projects { get; set; } = new List<Project>();
         //public string CreatedBy { get; set; } = string.Empty;
         //public string UpdatedBy { get; set; } = string.Empty;
         //public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

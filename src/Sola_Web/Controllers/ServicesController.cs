@@ -19,6 +19,7 @@ namespace Sola_Web.Controllers
             _categoryService = categoryService;
             _imageService = imageService;
         }
+
         public async Task<IActionResult> Index(int? categoryId)
         {
             var categories = await _categoryService.GetAllServiceCategoriesAsync();
