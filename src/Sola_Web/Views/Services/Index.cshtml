@@ -11,6 +11,18 @@
     <p>
         <a asp-action="AddService">Create New</a>
     </p>
+    <form asp-action="Index" method="get" class="mb-3">
+        <div class="row g-2">
+            <div class="col-md-4">
+                <select name="categoryId" class="form-select" asp-items="ViewBag.Categories">
+                    <option value="">All Categories</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+        </div>
+    </form>
     <table class="table">
         <thead>
             <tr>

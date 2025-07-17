@@ -15,9 +15,17 @@ namespace Sola_Web.Controllers
             _service = service;
             _categoryService = categoryService;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? categoryId)
         {
-            return View(await _service.GetAllServicesAsync());
+            var categories = await _categoryService.GetAllServiceCategoriesAsync();
+            ViewBag.Categories = new SelectList(categories, "Id", "Name", categoryId);
+
+            IEnumerable<Service> services = categoryId.HasValue
+                ? await _service.GetServicesByCategoryAsync(categoryId.Value)
+                : await _service.GetAllServicesAsync();
+
+            ViewBag.SelectedCategoryId = categoryId;
+            return View(services);
         }
 
         [HttpGet(Name = "Create")]
