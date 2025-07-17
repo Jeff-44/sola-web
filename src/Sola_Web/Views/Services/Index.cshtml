@@ -23,33 +23,23 @@
             </div>
         </div>
     </form>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Active</th>
-                <th>
-                    Category
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Name</td>
-                    <td>@item.Description</td>
-                    <td>@item.IsActive</td>
-                    <td>@item.ServiceCategory?.Name</td>
-                    <td>
-                        <a asp-action="EditService" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="DeleteService" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="row g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 service-card">
+                    <img src="@item.IconUrl" class="card-img-top" alt="@item.Name" />
+                    <div class="card-body d-flex flex-column">
+                        <h3 class="card-title">@item.Name</h3>
+                        <p class="card-text flex-grow-1">@item.Description</p>
+                        <div class="mt-3">
+                            <a asp-action="EditService" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="DeleteService" asp-route-id="@item.Id">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
