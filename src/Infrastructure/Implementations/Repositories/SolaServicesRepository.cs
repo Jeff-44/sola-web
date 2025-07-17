@@ -14,11 +14,7 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<Service>> GetAllWithCategoriesAsync()
         {
             return await _context.Services
-
                 //.Include(s => s.ServiceCategory)
-
-                .Include(nameof(Service.ServiceCategory))
-
                 .ToListAsync();
         }
 
@@ -26,7 +22,6 @@ namespace Infrastructure.Repositories
         {
             return await _context.Services
                 //.Include(s => s.ServiceCategory)
-                .Include(nameof(Service.ServiceCategory))
                 .Where(s => s.ServiceCategoryId == categoryId)
                 .ToListAsync();
         }
@@ -34,11 +29,7 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<Service>> GetActiveServicesAsync()
         {
             return await _context.Services
-
                 //.Include(s => s.ServiceCategory)
-
-                .Include(nameof(Service.ServiceCategory))
-
                 .Where(s => s.IsActive)
                 .ToListAsync();
         }
