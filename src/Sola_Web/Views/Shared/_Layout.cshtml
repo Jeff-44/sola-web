@@ -113,8 +113,9 @@
 
             <div class="nav-links">
                 <a asp-action="Index" asp-controller="Home">Accueil</a>
-                <a href="#services">Services</a>
-               @*  <a href="#products">Produits</a> *@
+                <a asp-action="Index" asp-controller="Services">Services</a>
+                <a asp-action="Index" asp-controller="ServiceCategory">Catégories</a>
+                @*  <a href="#products">Produits</a> *@
                 @* <a href="#about">À propos</a> *@
                 <a asp-action="Index" asp-controller="Contact" class="btn">Contact</a>
                 @* <a href="#order" class="btn">Commander</a> *@
@@ -149,11 +150,12 @@
                 <h3>Liens rapides</h3>
                 <ul>
                     <li><a asp-action="Index" asp-controller="Home">Accueil</a></li>
-                    <li><a href="#services">Services</a></li>
+                    <li><a asp-action="Index" asp-controller="Services">Services</a></li>
+                    <li><a asp-action="Index" asp-controller="ServiceCategory">Catégories</a></li>
                     @* <li><a href="#products">Produits</a></li> *@
                    @*  <li><a href="#about">À propos</a></li> *@
                     @* <li><a href="#order">Commander</a></li> *@
-                    <li><a asp-action="Index" asp-controller="Home">Contact</a></li>
+                    <li><a asp-action="Index" asp-controller="Contact">Contact</a></li>
                 </ul>
             </div>
 
