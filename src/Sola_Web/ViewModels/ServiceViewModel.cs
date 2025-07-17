@@ -13,7 +13,6 @@ namespace Sola_Web.ViewModels
         [Required]
         public string Description { get; set; } = string.Empty;
 
-        [Required]
         public string IconUrl { get; set; } = string.Empty;
 
         [Required]
@@ -22,6 +21,7 @@ namespace Sola_Web.ViewModels
         [Required]
         public int ServiceCategoryId { get; set; }
 
+        [Required]
         public IFormFile? IconImage { get; set; }
     }
 }
