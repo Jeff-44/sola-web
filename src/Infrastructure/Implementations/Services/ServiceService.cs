@@ -1,6 +1,7 @@
 using ApplicationCore.Models;
 using ApplicationCore.Interfaces.IRepository;
 using ApplicationCore.Interfaces.IServices;
+using Sola_Web.ViewModels;
 
 namespace Infrastructure.Services
 {
@@ -40,7 +41,7 @@ namespace Infrastructure.Services
             return services;
         }
 
-        public async Task<Service> CreateServiceAsync(Service createServiceVM)
+        public async Task<Service> CreateServiceAsync(ServiceViewModel createServiceVM)
         {
             var service = new Service
             {
@@ -56,7 +57,7 @@ namespace Infrastructure.Services
             return createdService;
         }
 
-        public async Task<Service> UpdateServiceAsync(Service updateServiceVM)
+        public async Task<Service> UpdateServiceAsync(ServiceViewModel updateServiceVM)
         {
             var updateService = await _serviceRepository.GetByIdAsync(updateServiceVM.Id);
             if (updateService == null)

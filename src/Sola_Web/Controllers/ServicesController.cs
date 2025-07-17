@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Interfaces.IServices;
 using ApplicationCore.Models;
+using Sola_Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -25,11 +26,11 @@ namespace Sola_Web.Controllers
         {
             var categories = await _categoryService.GetAllServiceCategoriesAsync();
             ViewBag.ServiceCategories = new SelectList(categories, "Id", "Name");
-            return View();
+            return View(new ServiceViewModel());
         }
 
         [HttpPost(Name = "Create")]
-        public async Task<IActionResult> AddService([Bind("Name,Description,IconUrl,IsActive,ServiceCategoryId")] Service model)
+        public async Task<IActionResult> AddService(ServiceViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -49,13 +50,24 @@ namespace Sola_Web.Controllers
             {
                 return NotFound();
             }
+
+            var serviceVM = new ServiceViewModel
+            {
+                Id = service.Id,
+                Name = service.Name,
+                Description = service.Description,
+                IconUrl = service.IconUrl,
+                IsActive = service.IsActive,
+                ServiceCategoryId = service.ServiceCategoryId
+            };
+
             var categories = await _categoryService.GetAllServiceCategoriesAsync();
             ViewBag.ServiceCategories = new SelectList(categories, "Id", "Name");
-            return View(service);
+            return View(serviceVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditService([Bind("Id,Name,Description,IconUrl,IsActive,ServiceCategoryId")] Service model)
+        public async Task<IActionResult> EditService(ServiceViewModel model)
         {
             if (ModelState.IsValid)
             {
