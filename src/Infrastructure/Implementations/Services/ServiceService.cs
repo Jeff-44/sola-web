@@ -1,7 +1,6 @@
 using ApplicationCore.Models;
 using ApplicationCore.Interfaces.IRepository;
 using ApplicationCore.Interfaces.IServices;
-using Sola_Web.ViewModels;
 
 namespace Infrastructure.Services
 {
@@ -41,39 +40,28 @@ namespace Infrastructure.Services
             return services;
         }
 
-        public async Task<Service> CreateServiceAsync(ServiceViewModel createServiceVM)
+        public async Task<Service> CreateServiceAsync(Service createService)
         {
-            var service = new Service
-            {
-                Name = createServiceVM.Name,
-                Description = createServiceVM.Description,
-                IconUrl = createServiceVM.IconUrl,
-                IsActive = createServiceVM.IsActive,
-                ServiceCategoryId = createServiceVM.ServiceCategoryId
-            };
-
-            var createdService = await _serviceRepository.AddAsync(service);
-            //return MapToDto(updateService);
+            var createdService = await _serviceRepository.AddAsync(createService);
             return createdService;
         }
 
-        public async Task<Service> UpdateServiceAsync(ServiceViewModel updateServiceVM)
+        public async Task<Service> UpdateServiceAsync(Service updateService)
         {
-            var updateService = await _serviceRepository.GetByIdAsync(updateServiceVM.Id);
-            if (updateService == null)
+            var existingService = await _serviceRepository.GetByIdAsync(updateService.Id);
+            if (existingService == null)
             {
-                throw new KeyNotFoundException($"Service with ID {updateServiceVM.Id} not found.");
+                throw new KeyNotFoundException($"Service with ID {updateService.Id} not found.");
             }
 
-            updateService.Name = updateServiceVM.Name;
-            updateService.Description = updateServiceVM.Description;
-            updateService.IconUrl = updateServiceVM.IconUrl;
-            updateService.IsActive = updateServiceVM.IsActive;
-            updateService.ServiceCategoryId = updateServiceVM.ServiceCategoryId;
+            existingService.Name = updateService.Name;
+            existingService.Description = updateService.Description;
+            existingService.IconUrl = updateService.IconUrl;
+            existingService.IsActive = updateService.IsActive;
+            existingService.ServiceCategoryId = updateService.ServiceCategoryId;
 
-            await _serviceRepository.UpdateAsync(updateService);
-            //return MapToDto(updateService);
-            return updateService;
+            await _serviceRepository.UpdateAsync(existingService);
+            return existingService;
         }
 
         public async Task DeleteServiceAsync(int id)

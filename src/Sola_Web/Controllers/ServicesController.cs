@@ -41,15 +41,23 @@ namespace Sola_Web.Controllers
         }
 
         [HttpPost(Name = "Create")]
-        public async Task<IActionResult> AddService([Bind("Name,Description,IsActive,ServiceCategoryId")] Service model, IFormFile? iconFile)
+        public async Task<IActionResult> AddService(ServiceViewModel model)
         {
             if (ModelState.IsValid)
             {
-                if (iconFile != null)
+                if (model.IconImage != null)
                 {
-                    model.IconUrl = await _imageService.UploadAsync(iconFile, "services");
+                    model.IconUrl = await _imageService.UploadAsync(model.IconImage, "services");
                 }
-                await _service.CreateServiceAsync(model);
+                var service = new Service
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    IconUrl = model.IconUrl,
+                    IsActive = model.IsActive,
+                    ServiceCategoryId = model.ServiceCategoryId
+                };
+                await _service.CreateServiceAsync(service);
                 return RedirectToAction(nameof(Index));
             }
             var categories = await _categoryService.GetAllServiceCategoriesAsync();
@@ -82,15 +90,24 @@ namespace Sola_Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditService([Bind("Id,Name,Description,IconUrl,IsActive,ServiceCategoryId")] Service model, IFormFile? iconFile)
+        public async Task<IActionResult> EditService(ServiceViewModel model)
         {
             if (ModelState.IsValid)
             {
-                if (iconFile != null)
+                if (model.IconImage != null)
                 {
-                    model.IconUrl = await _imageService.UploadAsync(iconFile, "services");
+                    model.IconUrl = await _imageService.UploadAsync(model.IconImage, "services");
                 }
-                await _service.UpdateServiceAsync(model);
+                var service = new Service
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    Description = model.Description,
+                    IconUrl = model.IconUrl,
+                    IsActive = model.IsActive,
+                    ServiceCategoryId = model.ServiceCategoryId
+                };
+                await _service.UpdateServiceAsync(service);
                 return RedirectToAction(nameof(Index));
             }
             var categories = await _categoryService.GetAllServiceCategoriesAsync();
