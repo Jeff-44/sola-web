@@ -230,6 +230,28 @@
             border-radius: 20px;
             font-size: 0.8rem;
         }
+
+        /* Service Categories */
+        .category-card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+            .category-card:hover {
+                transform: translateY(-5px);
+            }
+
+        .category-card .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #004d40;
+        }
+
+        .category-card .card-text {
+            color: #555;
+        }
         
         /* Order Form */
         .order-form {
