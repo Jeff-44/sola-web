@@ -393,4 +393,26 @@
         .fade-in {
             animation: fadeIn 1s ease forwards;
         }
+
+        /* Service Card Styles */
+        .service-card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+            .service-card:hover {
+                transform: translateY(-5px);
+            }
+
+        .service-card .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #004d40;
+        }
+
+        .service-card .card-text {
+            color: #555;
+        }
  
