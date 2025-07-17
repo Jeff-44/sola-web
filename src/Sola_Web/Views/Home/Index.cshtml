@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<ApplicationCore.Models.Service>
+@{
     ViewData["Title"] = "Accueil";
 }
 
@@ -109,83 +110,18 @@
         <h2 class="text-center mb-5">Nos Services</h2>
         <div class="row g-4">
 
-            <!-- Service 1 -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100">
-                    <img src="~/images/sola/install01.jpg" class="card-img-top" alt="Installation clé en main">
-                    <div class="card-body">
-                        <h3 class="card-title">Installation clé en main</h3>
-                        <p class="card-text">
-                            Étude de site, dimensionnement, fourniture et pose de panneaux solaires photovoltaïques, incluant onduleurs et batteries, pour particuliers et professionnels.
-                        </p>
+            @foreach (var service in Model)
+            {
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100">
+                        <img src="@service.IconUrl" class="card-img-top" alt="@service.Name" />
+                        <div class="card-body">
+                            <h3 class="card-title">@service.Name</h3>
+                            <p class="card-text">@service.Description</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Service 2 -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100">
-                    <img src="https://source.unsplash.com/400x300/?solar-maintenance" class="card-img-top" alt="Maintenance & Réparation">
-                    <div class="card-body">
-                        <h3 class="card-title">Maintenance & Réparation</h3>
-                        <p class="card-text">
-                            Contrats de maintenance préventive et corrective, vérification des performances, nettoyage des modules et remplacement de composants défectueux.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 3 -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100">
-                    <img src="https://source.unsplash.com/400x300/?energy-audit" class="card-img-top" alt="Audit & Conseil énergétique">
-                    <div class="card-body">
-                        <h3 class="card-title">Audit & Conseil énergétique</h3>
-                        <p class="card-text">
-                            Analyse de votre consommation, recommandations pour optimiser l’efficacité et réduire votre facture électrique grâce aux énergies renouvelables.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 4 -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100">
-                    <img src="https://source.unsplash.com/400x300/?solar-monitoring" class="card-img-top" alt="Suivi & Monitoring">
-                    <div class="card-body">
-                        <h3 class="card-title">Suivi & Monitoring</h3>
-                        <p class="card-text">
-                            Plateforme de supervision en temps réel, alertes automatiques et rapports périodiques pour garantir un rendement optimal de votre installation.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 5 -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100">
-                    <img src="https://source.unsplash.com/400x300/?solar-financing" class="card-img-top" alt="Financement & Subventions">
-                    <div class="card-body">
-                        <h3 class="card-title">Financement & Subventions</h3>
-                        <p class="card-text">
-                            Accompagnement administratif, montage de dossiers de financement et recherche de subventions pour réduire l’investissement initial.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 6 -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="card h-100">
-                    <img src="~/images/sola/Training.jpg" class="card-img-top" alt="Formation et Sensibilisation">
-                    <div class="card-body">
-                        <h3 class="card-title">Formation et Sensibilisation</h3>
-                        <p class="card-text">
-                            Sessions de formation pour vos équipes sur l’exploitation et l’entretien des systèmes solaires, ainsi que des ateliers de sensibilisation à l’énergie verte.
-                        </p>
-                    </div>
-                </div>
-            </div>
+            }
 
         </div>
     </div>
