@@ -1,0 +1,43 @@
+@model IEnumerable<ApplicationCore.Models.Service>
+
+@{
+    ViewData["Title"] = "Services";
+}
+
+<div class="container my-5">
+    <div style="height:2rem; width:2rem;"></div>
+    <h1>Services</h1>
+
+    <p>
+        <a asp-action="AddService">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Active</th>
+                <th>
+                    Category
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.IsActive</td>
+                    <td>@item.ServiceCategory?.Name</td>
+                    <td>
+                        <a asp-action="EditService" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="DeleteService" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

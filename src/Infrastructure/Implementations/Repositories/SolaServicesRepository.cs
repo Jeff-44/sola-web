@@ -11,6 +11,13 @@ namespace Infrastructure.Repositories
         {
         }
 
+        public async Task<IEnumerable<Service>> GetAllWithCategoriesAsync()
+        {
+            return await _context.Services
+                .Include(s => s.ServiceCategory)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<Service>> GetServicesByCategoryAsync(int categoryId)
         {
             return await _context.Services

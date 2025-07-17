@@ -15,8 +15,7 @@ namespace Infrastructure.Services
 
         public async Task<IEnumerable<Service>> GetAllServicesAsync()
         {
-            var services = await _serviceRepository.GetAllAsync();
-            //return services.Select(MapToDto);
+            var services = await _serviceRepository.GetAllWithCategoriesAsync();
             return services;
         }
 
