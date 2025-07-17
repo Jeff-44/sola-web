@@ -25,20 +25,20 @@ namespace Infrastructure.Services
             return _repository.AddAsync(serviceCategory);
         }
 
-        public Task DeleteServiceCategoryAsync(int id)
+        public async Task DeleteServiceCategoryAsync(int id)
         {
             if (id <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(id), "ID must be greater than zero.");
             }
-            var serviceCategory = _repository.GetByIdAsync(id);
+
+            var serviceCategory = await _repository.GetByIdAsync(id);
             if (serviceCategory == null)
             {
                 throw new KeyNotFoundException($"Service category with ID {id} not found.");
             }
-            // Assuming the repository has a method to delete by entity
-            return _repository.DeleteAsync(serviceCategory.Result!);
-            throw new NotImplementedException();
+
+            await _repository.DeleteAsync(serviceCategory);
         }
 
         public Task<IEnumerable<ServiceCategory>> GetAllServiceCategoriesAsync()
@@ -55,18 +55,17 @@ namespace Infrastructure.Services
             return _repository.GetByIdAsync(id);
         }
 
-        public Task UpdateServiceCategoryAsync(ServiceCategory serviceCategory)
+        public async Task UpdateServiceCategoryAsync(ServiceCategory serviceCategory)
         {
-            var obj = _repository.GetByIdAsync(serviceCategory.Id);
-            if (obj == null)
+            var result = await _repository.GetByIdAsync(serviceCategory.Id);
+            if (result == null)
             {
                 throw new Exception("Invalid request.");
             }
 
-            var result = obj.Result;
             result.Name = serviceCategory.Name;
             result.Description = serviceCategory.Description;
-            return _repository.UpdateAsync(result);
+            await _repository.UpdateAsync(result);
         }
     }
 }
