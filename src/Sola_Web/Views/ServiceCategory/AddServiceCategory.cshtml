@@ -1,0 +1,44 @@
+﻿@model ApplicationCore.Models.ServiceCategory
+
+@{
+    ViewData["Title"] = "Service Category";
+}
+
+
+
+<div class="container my-5">
+    <!--astuce pour eviter les chevauchement-->
+    <div style="height:2rem; width:2rem;"></div>
+    <h1>Service Category</h1>
+
+    <h4>ServiceCategory</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="AddServiceCategpry">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div><h1>Index</h1>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
