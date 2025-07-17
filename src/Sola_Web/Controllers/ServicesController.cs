@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Interfaces.IServices;
 using ApplicationCore.Models;
+using Sola_Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Http;
@@ -36,7 +37,7 @@ namespace Sola_Web.Controllers
         {
             var categories = await _categoryService.GetAllServiceCategoriesAsync();
             ViewBag.ServiceCategories = new SelectList(categories, "Id", "Name");
-            return View();
+            return View(new ServiceViewModel());
         }
 
         [HttpPost(Name = "Create")]
@@ -64,9 +65,20 @@ namespace Sola_Web.Controllers
             {
                 return NotFound();
             }
+
+            var serviceVM = new ServiceViewModel
+            {
+                Id = service.Id,
+                Name = service.Name,
+                Description = service.Description,
+                IconUrl = service.IconUrl,
+                IsActive = service.IsActive,
+                ServiceCategoryId = service.ServiceCategoryId
+            };
+
             var categories = await _categoryService.GetAllServiceCategoriesAsync();
             ViewBag.ServiceCategories = new SelectList(categories, "Id", "Name");
-            return View(service);
+            return View(serviceVM);
         }
 
         [HttpPost]
