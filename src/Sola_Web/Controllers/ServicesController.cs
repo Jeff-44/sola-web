@@ -2,6 +2,7 @@
 using ApplicationCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
 
 namespace Sola_Web.Controllers
 {
@@ -9,11 +10,13 @@ namespace Sola_Web.Controllers
     {
         private readonly IServiceService _service;
         private readonly IServiceCategoryService _categoryService;
+        private readonly IImageService _imageService;
 
-        public ServicesController(IServiceService service, IServiceCategoryService categoryService)
+        public ServicesController(IServiceService service, IServiceCategoryService categoryService, IImageService imageService)
         {
             _service = service;
             _categoryService = categoryService;
+            _imageService = imageService;
         }
         public async Task<IActionResult> Index()
         {
@@ -29,10 +32,14 @@ namespace Sola_Web.Controllers
         }
 
         [HttpPost(Name = "Create")]
-        public async Task<IActionResult> AddService([Bind("Name,Description,IconUrl,IsActive,ServiceCategoryId")] Service model)
+        public async Task<IActionResult> AddService([Bind("Name,Description,IsActive,ServiceCategoryId")] Service model, IFormFile? iconFile)
         {
             if (ModelState.IsValid)
             {
+                if (iconFile != null)
+                {
+                    model.IconUrl = await _imageService.UploadAsync(iconFile, "services");
+                }
                 await _service.CreateServiceAsync(model);
                 return RedirectToAction(nameof(Index));
             }
@@ -55,10 +62,14 @@ namespace Sola_Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditService([Bind("Id,Name,Description,IconUrl,IsActive,ServiceCategoryId")] Service model)
+        public async Task<IActionResult> EditService([Bind("Id,Name,Description,IconUrl,IsActive,ServiceCategoryId")] Service model, IFormFile? iconFile)
         {
             if (ModelState.IsValid)
             {
+                if (iconFile != null)
+                {
+                    model.IconUrl = await _imageService.UploadAsync(iconFile, "services");
+                }
                 await _service.UpdateServiceAsync(model);
                 return RedirectToAction(nameof(Index));
             }
