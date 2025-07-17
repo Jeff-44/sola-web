@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApplicationCore\ApplicationCore.csproj" />
-    <ProjectReference Include="..\Sola_Web\Sola_Web.csproj" />
   </ItemGroup>
 
 </Project>
