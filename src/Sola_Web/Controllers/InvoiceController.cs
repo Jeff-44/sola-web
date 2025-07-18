@@ -8,13 +8,11 @@ namespace Sola_Web.Controllers
     public class InvoiceController : Controller
     {
         private readonly IViewRenderService _renderer;
-        private readonly IPdfService _pdfService;
         private readonly IEmailAttachmentSender _emailSender;
 
-        public InvoiceController(IViewRenderService renderer, IPdfService pdfService, IEmailAttachmentSender emailSender)
+        public InvoiceController(IViewRenderService renderer, IEmailAttachmentSender emailSender)
         {
             _renderer = renderer;
-            _pdfService = pdfService;
             _emailSender = emailSender;
         }
 
@@ -37,11 +35,11 @@ namespace Sola_Web.Controllers
             }
 
             var html = await _renderer.RenderToStringAsync("Invoice/Invoice", model);
-            var pdfBytes = _pdfService.GeneratePdfFromHtml(html);
+            var htmlBytes = System.Text.Encoding.UTF8.GetBytes(html);
 
-            await _emailSender.SendEmailWithAttachmentAsync(model.Email, "Invoice", "Please find attached your invoice.", pdfBytes, "invoice.pdf");
+            await _emailSender.SendEmailWithAttachmentAsync(model.Email, "Invoice", "Please find attached your invoice.", htmlBytes, "invoice.html");
 
-            return File(pdfBytes, "application/pdf", "invoice.pdf");
+            return File(htmlBytes, "text/html", "invoice.html");
         }
     }
 }
