@@ -3,7 +3,7 @@ using ApplicationCore.Interfaces.IServices;
 using ApplicationCore.Settings;
 using ApplicationCore.Utils;
 using DinkToPdf;
-using DinkToPdf.Contracts;
+using DinkToPdf.Standard;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
