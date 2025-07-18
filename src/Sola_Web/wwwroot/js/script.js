@@ -29,7 +29,8 @@
 
     // Gestion du formulaire
     const orderForm = document.getElementById('orderForm');
-        
+
+    if (orderForm) {
         orderForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -50,11 +51,12 @@
 
     // Simulation d'envoi
     alert('Merci pour votre commande! Nous vous contacterons sous peu pour finaliser les détails.');
-    orderForm.reset();
+        orderForm.reset();
 
             // Redirection (optionnelle)
             // window.location.href = 'merci.html';
         });
+    }
 
     // Calculatrice solaire (exemple simple)
     function calculateSavings() {
