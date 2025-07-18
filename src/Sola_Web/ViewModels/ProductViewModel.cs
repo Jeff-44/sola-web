@@ -3,24 +3,23 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Sola_Web.ViewModels
 {
-    public class ServiceViewModel
+    public class ProductViewModel
     {
         public int Id { get; set; }
 
         [Required]
         public string Name { get; set; } = string.Empty;
 
-        [Required]
         public string Description { get; set; } = string.Empty;
 
-        public string IconUrl { get; set; } = string.Empty;
+        [Range(0, double.MaxValue)]
+        public decimal Price { get; set; }
 
-        [Required]
-        public bool IsActive { get; set; }
+        [Range(0, int.MaxValue)]
+        public int Stock { get; set; }
 
-        [Required]
-        public int ServiceCategoryId { get; set; }
+        public string ImageUrl { get; set; } = string.Empty;
 
-        public IFormFile? IconImage { get; set; }
+        public IFormFile? ImageFile { get; set; }
     }
 }
