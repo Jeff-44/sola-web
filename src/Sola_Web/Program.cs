@@ -2,12 +2,16 @@ using ApplicationCore.Interfaces.IRepository;
 using ApplicationCore.Interfaces.IServices;
 using ApplicationCore.Settings;
 using ApplicationCore.Utils;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using ApplicationCore.Models;
+using Sola_Web.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,19 +24,26 @@ builder.Services.AddDbContext<SolaContext>(options =>
     options.UseNpgsql(connectionstring);
 });
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<SolaContext>();
 // Register repositories
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ISolaServicesRepository, SolaServicesRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IServiceCategoryRepository, ServiceCategoryRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 // Register services
 builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IServiceCategoryService, ServiceCategoryService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddScoped<IViewRenderService, ViewRenderService>();
+builder.Services.AddTransient<IPdfService, PdfService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddTransient<IEmailAttachmentSender, EmailSender>();
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 var app = builder.Build();
 
