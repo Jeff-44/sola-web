@@ -25,7 +25,8 @@ namespace ApplicationCore.Utils
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
             var emailMessage = new MimeMessage();
-            emailMessage.From.Add(new MailboxAddress("Sola", email));
+            emailMessage.From.Add(new MailboxAddress("Sola", _emailSettings.FromEmail));
+            emailMessage.ReplyTo.Add(new MailboxAddress("", email));
             emailMessage.To.Add(new MailboxAddress("", _emailSettings.FromEmail));
             emailMessage.Subject = subject;
             emailMessage.Body = new TextPart("plain") { Text = $"From: {email} " +
