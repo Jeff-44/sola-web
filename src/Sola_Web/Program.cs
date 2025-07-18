@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Sola_Web.Services;
 using Sola_Web.Utils;
 using System.IO;
-
+using System.Runtime.InteropServices;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionstring = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -30,8 +30,22 @@ builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<SolaContext>();
 
 var loadContext = new CustomAssemblyLoadContext();
-var wkhtmlPath = Path.Combine(Directory.GetCurrentDirectory(), "runtimes", "linux-x64", "native", "libwkhtmltox.so");
-loadContext.LoadUnmanagedLibrary(wkhtmlPath);
+string nativeLibPath;
+
+if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+{
+    nativeLibPath = Path.Combine(Directory.GetCurrentDirectory(), "runtimes", "win-x64", "native", "libwkhtmltox.dll");
+}
+else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+{
+    nativeLibPath = Path.Combine(Directory.GetCurrentDirectory(), "runtimes", "linux-x64", "native", "libwkhtmltox.so");
+}
+else
+{
+    throw new PlatformNotSupportedException("Only Windows and Linux are supported.");
+}
+
+loadContext.LoadUnmanagedLibrary(nativeLibPath);
 
 // Register repositories
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
