@@ -6,6 +6,9 @@ USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
+RUN apt-get update && \
+    apt-get install -y wkhtmltopdf libgdiplus && \
+    rm -rf /var/lib/apt/lists/*
 
 
 # This stage is used to build the service project
