@@ -1,9 +1,15 @@
 @model Sola_Web.ViewModels.InvoiceViewModel
+@using System.Linq
 @{
     ViewData["Title"] = "Create Invoice";
 }
 
-<h2>Create Invoice</h2>
+@{
+    var products = ViewBag.Products as IEnumerable<ApplicationCore.Models.Product> ?? Enumerable.Empty<ApplicationCore.Models.Product>();
+}
+
+<div class="container py-5 mt-5">
+<h2 class="mb-4">Create Invoice</h2>
 
 <form asp-action="Create" method="post" id="invoiceForm">
     <div id="itemsContainer">
@@ -11,7 +17,13 @@
         {
             <div class="invoice-item row g-2 mb-3" data-index="@i">
                 <div class="col-sm-4">
-                    <input asp-for="Items[i].ProductName" class="form-control" placeholder="Product" />
+                    <select asp-for="Items[i].ProductName" class="form-select product-select">
+                        <option value="">Select product</option>
+                        @foreach (var p in products)
+                        {
+                            <option value="@p.Name" data-price="@p.Price">@p.Name</option>
+                        }
+                    </select>
                     <span asp-validation-for="Items[i].ProductName" class="text-danger"></span>
                 </div>
                 <div class="col-sm-3">
@@ -42,7 +54,13 @@
 <div id="itemTemplate" class="d-none">
     <div class="invoice-item row g-2 mb-3" data-index="__index__">
         <div class="col-sm-4">
-            <input name="Items[__index__].ProductName" class="form-control" placeholder="Product" />
+            <select name="Items[__index__].ProductName" class="form-select product-select">
+                <option value="">Select product</option>
+                @foreach (var p in products)
+                {
+                    <option value="@p.Name" data-price="@p.Price">@p.Name</option>
+                }
+            </select>
         </div>
         <div class="col-sm-3">
             <input name="Items[__index__].Quantity" class="form-control" placeholder="Quantity" />
@@ -53,9 +71,9 @@
         <div class="col-sm-2 d-flex align-items-center">
             <button type="button" class="btn btn-danger remove-item">&times;</button>
         </div>
-    </div>
 </div>
-
+</div>
+</div>
 @section Scripts {
     <script>
         (function () {
@@ -63,17 +81,26 @@
             const template = document.getElementById('itemTemplate').innerHTML;
             const addBtn = document.getElementById('addItem');
 
+            function bindProductSelect(select) {
+                select.addEventListener('change', () => {
+                    const price = select.selectedOptions[0].getAttribute('data-price') || '';
+                    const item = select.closest('.invoice-item');
+                    const priceInput = item.querySelector('input[name$=".UnitPrice"]');
+                    if (priceInput) priceInput.value = price;
+                });
+            }
+
             function updateIndexes() {
                 const items = container.querySelectorAll('.invoice-item');
                 items.forEach((item, idx) => {
                     item.dataset.index = idx;
-                    item.querySelectorAll('input').forEach(input => {
-                        const name = input.getAttribute('name');
+                    item.querySelectorAll('input, select').forEach(el => {
+                        const name = el.getAttribute('name');
                         if (name) {
-                            input.setAttribute('name', name.replace(/Items\[[0-9]+\]/, `Items[${idx}]`));
-                        } else if (input.getAttribute('id')) {
-                            const id = input.getAttribute('id');
-                            input.setAttribute('id', id.replace(/Items_[0-9]+_/, `Items_${idx}_`));
+                            el.setAttribute('name', name.replace(/Items\[[0-9]+\]/, `Items[${idx}]`));
+                        } else if (el.getAttribute('id')) {
+                            const id = el.getAttribute('id');
+                            el.setAttribute('id', id.replace(/Items_[0-9]+_/, `Items_${idx}_`));
                         }
                     });
                 });
@@ -83,6 +110,8 @@
                 const index = container.querySelectorAll('.invoice-item').length;
                 const html = template.replace(/__index__/g, index);
                 container.insertAdjacentHTML('beforeend', html);
+                const newSelect = container.lastElementChild.querySelector('.product-select');
+                if (newSelect) bindProductSelect(newSelect);
             });
 
             container.addEventListener('click', (e) => {
@@ -91,6 +120,9 @@
                     updateIndexes();
                 }
             });
+
+            // bind events for initial selects
+            container.querySelectorAll('.product-select').forEach(bindProductSelect);
         })();
     </script>
 }
