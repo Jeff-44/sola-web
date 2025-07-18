@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Settings;
+using ApplicationCore.Interfaces.IServices;
 using MailKit.Security;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Logging;
@@ -7,7 +8,7 @@ using MimeKit;
 
 namespace ApplicationCore.Utils
 {
-    public class EmailSender : IEmailSender
+    public class EmailSender : IEmailSender, IEmailAttachmentSender
     {
         //public Task SendEmailAsync(string email, string subject, string htmlMessage)
         //{
@@ -28,16 +29,30 @@ namespace ApplicationCore.Utils
             emailMessage.From.Add(new MailboxAddress("Sola", email));
             emailMessage.To.Add(new MailboxAddress("", _emailSettings.FromEmail));
             emailMessage.Subject = subject;
-            emailMessage.Body = new TextPart("plain") { Text = $"From: {email} " +
-                                                               $" " + 
-                                                                " " + htmlMessage
-                                                      };
+            emailMessage.Body = new TextPart("plain") { Text = $"From: {email} " + " " + " " + htmlMessage };
 
             using var client = new MailKit.Net.Smtp.SmtpClient();
-            //Connexion sécurisée avec TLS
             await client.ConnectAsync(_emailSettings.SmtpServer, _emailSettings.Port, SecureSocketOptions.StartTls);
             await client.AuthenticateAsync(_emailSettings.FromEmail, _emailSettings.Password);
             await client.SendAsync(emailMessage);
+            await client.DisconnectAsync(true);
+        }
+
+        public async Task SendEmailWithAttachmentAsync(string email, string subject, string message, byte[] attachmentData, string attachmentName)
+        {
+            var mimeMessage = new MimeMessage();
+            mimeMessage.From.Add(new MailboxAddress("Sola", _emailSettings.FromEmail));
+            mimeMessage.To.Add(MailboxAddress.Parse(email));
+            mimeMessage.Subject = subject;
+
+            var builder = new BodyBuilder { TextBody = message };
+            builder.Attachments.Add(attachmentName, attachmentData);
+            mimeMessage.Body = builder.ToMessageBody();
+
+            using var client = new MailKit.Net.Smtp.SmtpClient();
+            await client.ConnectAsync(_emailSettings.SmtpServer, _emailSettings.Port, SecureSocketOptions.StartTls);
+            await client.AuthenticateAsync(_emailSettings.FromEmail, _emailSettings.Password);
+            await client.SendAsync(mimeMessage);
             await client.DisconnectAsync(true);
         }
     }
