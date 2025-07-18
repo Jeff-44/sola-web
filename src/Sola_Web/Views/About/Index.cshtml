@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ApplicationCore.Models.TeamMember>
+@{
+    ViewData["Title"] = "À propos";
+}
+
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-light rounded p-2">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page">À propos</li>
+        </ol>
+    </nav>
+    <h2 class="text-center mb-4">Notre Équipe</h2>
+    <div class="row g-4">
+        @foreach (var member in Model)
+        {
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="card h-100 text-center shadow-sm">
+                    <img src="@member.PhotoUrl" class="card-img-top" alt="@member.Name" />
+                    <div class="card-body">
+                        <h5 class="card-title">@member.Name</h5>
+                        <p class="text-muted">@member.Role</p>
+                        <p class="card-text">@member.Bio</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

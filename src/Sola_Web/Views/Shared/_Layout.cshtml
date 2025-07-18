@@ -38,69 +38,6 @@
             color: #555;
         }
 
-       
-        /* Hero Carousel Styles */
-        #heroCarousel {
-            height: 100vh;
-            margin-top: 70px;
-            overflow: hidden;
-        }
-
-            #heroCarousel .carousel-item {
-                height: 100%;
-                background-size: cover !important;
-                background-position: center !important;
-                position: relative;
-            }
-            /* Background images via CSS classes with !important */
-            #heroCarousel .carousel-item-1 {
-                background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80') !important;
-            }
-
-            #heroCarousel .carousel-item-2 {
-                background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80') !important;
-            }
-
-            #heroCarousel .carousel-item-3 {
-                background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80') !important;
-            }
-
-            #heroCarousel .carousel-item-4 {
-                background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80') !important;
-            }
-
-            #heroCarousel .carousel-item-5 {
-                background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80') !important;
-            }
-
-            #heroCarousel .carousel-caption {
-                position: absolute;
-                top: 50%;
-                left: 5%;
-                transform: translateY(-50%);
-                background: rgba(0, 0, 0, 0.6);
-                padding: 1.5rem;
-                border-radius: 1rem;
-                max-width: 500px;
-            }
-
-                #heroCarousel .carousel-caption h2 {
-                    font-size: 2.5rem;
-                    color: var(--primary) !important;
-                    margin-bottom: 0.5rem;
-                }
-
-                #heroCarousel .carousel-caption p {
-                    font-size: 1.1rem;
-                    color: #f8f9fa !important;
-                    margin-bottom: 1rem;
-                }
-
-                #heroCarousel .carousel-caption .btn {
-                    padding: 0.7rem 1.6rem;
-                    border-radius: 30px;
-                    font-weight: 600;
-                }
     </style>
 </head>
 <body>
@@ -116,7 +53,7 @@
                 <a asp-action="Index" asp-controller="Services">Services</a>
                 <a asp-action="Index" asp-controller="ServiceCategory">Catégories</a>
                 @*  <a href="#products">Produits</a> *@
-                @* <a href="#about">À propos</a> *@
+                <a asp-action="Index" asp-controller="About">À propos</a>
                 <a asp-action="Index" asp-controller="Contact" class="btn">Contact</a>
                 @* <a href="#order" class="btn">Commander</a> *@
             </div>
