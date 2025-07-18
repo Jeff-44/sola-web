@@ -1,5 +1,4 @@
 ﻿
-<script>
         // JavaScript pour le site
 
     // Menu mobile
@@ -75,4 +74,3 @@
     <p><strong>Retour sur investissement:</strong> ${Math.round(estimatedCost / annualSavings)} ans</p>
     `;
         }
-</script>
