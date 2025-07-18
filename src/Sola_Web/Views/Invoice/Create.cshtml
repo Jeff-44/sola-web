@@ -2,22 +2,34 @@
 @{
     ViewData["Title"] = "Create Invoice";
 }
+
 <h2>Create Invoice</h2>
-<form asp-action="Create" method="post">
-    <div class="mb-3">
-        <label asp-for="Items[0].ProductName" class="form-label">Product</label>
-        <input asp-for="Items[0].ProductName" class="form-control" />
-        <span asp-validation-for="Items[0].ProductName" class="text-danger"></span>
+
+<form asp-action="Create" method="post" id="invoiceForm">
+    <div id="itemsContainer">
+        @for (int i = 0; i < Model.Items.Count; i++)
+        {
+            <div class="invoice-item row g-2 mb-3" data-index="@i">
+                <div class="col-sm-4">
+                    <input asp-for="Items[i].ProductName" class="form-control" placeholder="Product" />
+                    <span asp-validation-for="Items[i].ProductName" class="text-danger"></span>
+                </div>
+                <div class="col-sm-3">
+                    <input asp-for="Items[i].Quantity" class="form-control" placeholder="Quantity" />
+                    <span asp-validation-for="Items[i].Quantity" class="text-danger"></span>
+                </div>
+                <div class="col-sm-3">
+                    <input asp-for="Items[i].UnitPrice" class="form-control" placeholder="Unit Price" />
+                    <span asp-validation-for="Items[i].UnitPrice" class="text-danger"></span>
+                </div>
+                <div class="col-sm-2 d-flex align-items-center">
+                    <button type="button" class="btn btn-danger remove-item">&times;</button>
+                </div>
+            </div>
+        }
     </div>
     <div class="mb-3">
-        <label asp-for="Items[0].Quantity" class="form-label">Quantity</label>
-        <input asp-for="Items[0].Quantity" class="form-control" />
-        <span asp-validation-for="Items[0].Quantity" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Items[0].UnitPrice" class="form-label">Unit Price</label>
-        <input asp-for="Items[0].UnitPrice" class="form-control" />
-        <span asp-validation-for="Items[0].UnitPrice" class="text-danger"></span>
+        <button type="button" id="addItem" class="btn btn-secondary">Add Item</button>
     </div>
     <div class="mb-3">
         <label asp-for="Email" class="form-label">Email</label>
@@ -26,3 +38,59 @@
     </div>
     <button type="submit" class="btn btn-primary">Send Invoice</button>
 </form>
+
+<div id="itemTemplate" class="d-none">
+    <div class="invoice-item row g-2 mb-3" data-index="__index__">
+        <div class="col-sm-4">
+            <input name="Items[__index__].ProductName" class="form-control" placeholder="Product" />
+        </div>
+        <div class="col-sm-3">
+            <input name="Items[__index__].Quantity" class="form-control" placeholder="Quantity" />
+        </div>
+        <div class="col-sm-3">
+            <input name="Items[__index__].UnitPrice" class="form-control" placeholder="Unit Price" />
+        </div>
+        <div class="col-sm-2 d-flex align-items-center">
+            <button type="button" class="btn btn-danger remove-item">&times;</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            const container = document.getElementById('itemsContainer');
+            const template = document.getElementById('itemTemplate').innerHTML;
+            const addBtn = document.getElementById('addItem');
+
+            function updateIndexes() {
+                const items = container.querySelectorAll('.invoice-item');
+                items.forEach((item, idx) => {
+                    item.dataset.index = idx;
+                    item.querySelectorAll('input').forEach(input => {
+                        const name = input.getAttribute('name');
+                        if (name) {
+                            input.setAttribute('name', name.replace(/Items\[[0-9]+\]/, `Items[${idx}]`));
+                        } else if (input.getAttribute('id')) {
+                            const id = input.getAttribute('id');
+                            input.setAttribute('id', id.replace(/Items_[0-9]+_/, `Items_${idx}_`));
+                        }
+                    });
+                });
+            }
+
+            addBtn.addEventListener('click', () => {
+                const index = container.querySelectorAll('.invoice-item').length;
+                const html = template.replace(/__index__/g, index);
+                container.insertAdjacentHTML('beforeend', html);
+            });
+
+            container.addEventListener('click', (e) => {
+                if (e.target.classList.contains('remove-item')) {
+                    e.target.closest('.invoice-item').remove();
+                    updateIndexes();
+                }
+            });
+        })();
+    </script>
+}
