@@ -9,20 +9,23 @@ namespace Sola_Web.Controllers
     {
         private readonly IViewRenderService _renderer;
         private readonly IEmailAttachmentSender _emailSender;
+        private readonly IProductService _productService;
 
-        public InvoiceController(IViewRenderService renderer, IEmailAttachmentSender emailSender)
+        public InvoiceController(IViewRenderService renderer, IEmailAttachmentSender emailSender, IProductService productService)
         {
             _renderer = renderer;
             _emailSender = emailSender;
+            _productService = productService;
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             var model = new InvoiceViewModel
             {
                 Items = new List<InvoiceItemViewModel> { new InvoiceItemViewModel() }
             };
+            ViewBag.Products = await _productService.GetAllProductsAsync();
             return View(model);
         }
 
@@ -31,6 +34,7 @@ namespace Sola_Web.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.Products = await _productService.GetAllProductsAsync();
                 return View(model);
             }
 
@@ -39,7 +43,7 @@ namespace Sola_Web.Controllers
 
             await _emailSender.SendEmailWithAttachmentAsync(model.Email, "Invoice", "Please find attached your invoice.", htmlBytes, "invoice.html");
 
-            return File(htmlBytes, "text/html", "invoice.html");
+            return View("Invoice", model);
         }
     }
 }

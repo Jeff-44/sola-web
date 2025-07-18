@@ -47,7 +47,8 @@ namespace ApplicationCore.Utils
             mimeMessage.Subject = subject;
 
             var builder = new BodyBuilder { TextBody = message };
-            builder.Attachments.Add(attachmentName, attachmentData);
+            var contentType = new ContentType("text", "html");
+            builder.Attachments.Add(attachmentName, attachmentData, contentType);
             mimeMessage.Body = builder.ToMessageBody();
 
             using var client = new MailKit.Net.Smtp.SmtpClient();
