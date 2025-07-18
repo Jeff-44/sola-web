@@ -93,9 +93,10 @@ namespace Sola_Web.Controllers
         [HttpPost]
         public async Task<IActionResult> EditService(ServiceViewModel model)
         {
+            ModelState.Remove(nameof(ServiceViewModel.IconImage));
             if (ModelState.IsValid)
             {
-                if (model.IconImage != null)
+                if (model.IconImage != null && model.IconImage.Length > 0)
                 {
                     model.IconUrl = await _imageService.UploadAsync(model.IconImage, "services");
                 }
