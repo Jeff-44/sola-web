@@ -2,8 +2,6 @@ using ApplicationCore.Interfaces.IRepository;
 using ApplicationCore.Interfaces.IServices;
 using ApplicationCore.Settings;
 using ApplicationCore.Utils;
-using DinkToPdf;
-using DinkToPdf.Standard;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
@@ -38,9 +36,7 @@ builder.Services.AddScoped<IServiceCategoryService, ServiceCategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IViewRenderService, ViewRenderService>();
-builder.Services.AddTransient<IPdfService, PdfService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddTransient<IEmailAttachmentSender, EmailSender>();
