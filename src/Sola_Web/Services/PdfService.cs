@@ -1,5 +1,5 @@
 using DinkToPdf;
-using DinkToPdf.Contracts;
+using DinkToPdf.Standard;
 
 namespace Sola_Web.Services
 {
