@@ -21,7 +21,6 @@ namespace Sola_Web.ViewModels
         [Required]
         public int ServiceCategoryId { get; set; }
 
-        [Required]
         public IFormFile? IconImage { get; set; }
     }
 }
