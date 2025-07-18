@@ -1,17 +1,19 @@
 using ApplicationCore.Interfaces.IRepository;
 using ApplicationCore.Interfaces.IServices;
+using ApplicationCore.Models;
 using ApplicationCore.Settings;
 using ApplicationCore.Utils;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
-using ApplicationCore.Models;
-using DinkToPdf;
-using DinkToPdf.Contracts;
 using Sola_Web.Services;
+using Sola_Web.Utils;
+using System.IO;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +28,11 @@ builder.Services.AddDbContext<SolaContext>(options =>
 
 builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<SolaContext>();
+
+var loadContext = new CustomAssemblyLoadContext();
+var wkhtmlPath = Path.Combine(Directory.GetCurrentDirectory(), "runtimes", "linux-x64", "native", "libwkhtmltox.so");
+loadContext.LoadUnmanagedLibrary(wkhtmlPath);
+
 // Register repositories
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ISolaServicesRepository, SolaServicesRepository>();
