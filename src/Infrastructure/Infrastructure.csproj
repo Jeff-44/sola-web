@@ -15,7 +15,11 @@
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
     <PackageReference Include="DinkToPdf" Version="1.0.8" />
+<<<<<<< HEAD
 	<PackageReference Include="DinkToPdf.Native" Version="1.0.8" />
+=======
+    <PackageReference Include="DinkToPdf.Native" Version="1.0.8" />
+>>>>>>> 1354a71115017e67fb0779b0c1f08f6507f6b80d
   </ItemGroup>
 
   <ItemGroup>
