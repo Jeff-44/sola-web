@@ -39,7 +39,7 @@ namespace ApplicationCore.Utils
             await client.DisconnectAsync(true);
         }
 
-        public async Task SendEmailWithAttachmentAsync(string email, string subject, string message, byte[] attachmentData, string attachmentName)
+        public async Task SendEmailWithAttachmentAsync(string email, string subject, string message, byte[] attachmentData, string attachmentName, string mimeType = "application/pdf")
         {
             var mimeMessage = new MimeMessage();
             mimeMessage.From.Add(new MailboxAddress("Sola", _emailSettings.FromEmail));
@@ -47,7 +47,8 @@ namespace ApplicationCore.Utils
             mimeMessage.Subject = subject;
 
             var builder = new BodyBuilder { TextBody = message };
-            var contentType = new ContentType("text", "html");
+            var typeParts = mimeType.Split('/');
+            var contentType = new ContentType(typeParts[0], typeParts.Length > 1 ? typeParts[1] : string.Empty);
             builder.Attachments.Add(attachmentName, attachmentData, contentType);
             mimeMessage.Body = builder.ToMessageBody();
 

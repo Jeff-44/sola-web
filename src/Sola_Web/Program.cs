@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using ApplicationCore.Models;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using Sola_Web.Services;
 
 
@@ -35,6 +37,8 @@ builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IServiceCategoryService, ServiceCategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddSingleton<IConverter>(new SynchronizedConverter(new PdfTools()));
+builder.Services.AddScoped<IPdfService, HtmlToPdfService>();
 builder.Services.AddScoped<IViewRenderService, ViewRenderService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
