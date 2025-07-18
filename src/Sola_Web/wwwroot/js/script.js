@@ -1,5 +1,4 @@
 ﻿
-<script>
         // JavaScript pour le site
 
     // Menu mobile
@@ -29,7 +28,7 @@
 
     // Gestion du formulaire
     const orderForm = document.getElementById('orderForm');
-        
+    if (orderForm) {
         orderForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -55,6 +54,7 @@
             // Redirection (optionnelle)
             // window.location.href = 'merci.html';
         });
+    }
 
     // Calculatrice solaire (exemple simple)
     function calculateSavings() {
@@ -73,4 +73,3 @@
     <p><strong>Retour sur investissement:</strong> ${Math.round(estimatedCost / annualSavings)} ans</p>
     `;
         }
-</script>
