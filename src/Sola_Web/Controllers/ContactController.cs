@@ -17,11 +17,11 @@ namespace Sola_Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(ContactFormModel model)
+        public async Task<IActionResult> Index(ContactFormModel model)
         {
             if (ModelState.IsValid)
             {
-                _emailSender.SendEmailAsync(model.Email, model.Subject, model.Message);
+                await _emailSender.SendEmailAsync(model.Email, model.Subject, model.Message);
                 return RedirectToAction(nameof(Index));
             }
             return View(model);
