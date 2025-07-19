@@ -412,7 +412,28 @@
             color: #004d40;
         }
 
-        .service-card .card-text {
+.service-card .card-text {
             color: #555;
         }
+
+/* Utility classes for form layouts */
+.rounded-input {
+    border-radius: 0.5rem;
+}
+
+.gradient-card {
+    background: linear-gradient(135deg, #ffffff, #f9f9f9);
+}
+
+.img-preview {
+    max-height: 200px;
+}
+
+.return-link {
+    color: #555;
+}
+
+.max-w-200 {
+    max-width: 200px;
+}
  

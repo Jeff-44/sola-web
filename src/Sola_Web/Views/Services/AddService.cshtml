@@ -7,9 +7,9 @@
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #ffffff, #f9f9f9);">
+            <div class="card border-0 shadow-sm gradient-card">
                 <div class="card-body">
-                    <h2 class="card-title text-center mb-4" style="font-weight:600; color:#333;">Ajouter un Service</h2>
+                    <h2 class="card-title text-center mb-4 fw-semibold text-dark">Ajouter un Service</h2>
                     <form asp-action="AddService" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="mb-3">
@@ -23,7 +23,7 @@
                             <span asp-validation-for="Description" class="text-danger"></span>
                         </div>
                         <div class="mb-3 text-center">
-                            <img id="iconPreview" src="#" alt="Preview" class="img-thumbnail mb-2" style="display:none; max-height:200px;" />
+                            <img id="iconPreview" src="#" alt="Preview" class="img-thumbnail mb-2 img-preview d-none" />
                         </div>
                         <div class="mb-3">
                             <label asp-for="IconImage" class="form-label"></label>
@@ -46,7 +46,7 @@
                     </form>
                 </div>
                 <div class="card-footer text-center">
-                    <a asp-action="Index" class="text-decoration-none" style="color:#555;">Retour</a>
+                    <a asp-action="Index" class="text-decoration-none return-link">Retour</a>
                 </div>
             </div>
         </div>
