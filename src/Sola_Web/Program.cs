@@ -42,6 +42,9 @@ else
     throw new PlatformNotSupportedException("Only Windows and Linux are supported.");
 }
 
+var context = new CustomAssemblyLoadContext();
+context.LoadUnmanagedLibrary(nativeLibPath);
+
 
 // Register repositories
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
