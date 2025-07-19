@@ -35,13 +35,6 @@ builder.Services.AddDbContext<SolaContext>(options =>
 builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<SolaContext>();
 
-// Configure WkHtmlToPdf converter
-
-
-// Load native wkhtmltopdf library before using DinkToPdf
-NativeLibraryLoader.Load(nativeLibPath);
-
-
 // Register repositories
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ISolaServicesRepository, SolaServicesRepository>();
