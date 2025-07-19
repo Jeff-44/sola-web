@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Sola_Web.Services;
+using Sola_Web.Helpers;
 using System.Runtime.InteropServices;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,6 +42,9 @@ else
 {
     throw new PlatformNotSupportedException("Only Windows and Linux are supported.");
 }
+
+// Load native wkhtmltopdf library before using DinkToPdf
+NativeLibraryLoader.Load(nativeLibPath);
 
 
 // Register repositories
