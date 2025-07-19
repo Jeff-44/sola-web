@@ -15,8 +15,19 @@
             <p>@Model.Description</p>
             <p class="fw-bold">Price: @Model.Price.ToString("C")</p>
             <p>Stock: @(Model.Stock > 0 ? "In Stock" : "Out of Stock")</p>
-            <a asp-action="EditProduct" asp-route-id="@Model.Id">Edit</a> |
-            <a asp-action="Index">Back to List</a>
+            
+            <form asp-controller="Cart" asp-action="AddToCart" method="post" class="mb-3">
+                <input type="hidden" name="productId" value="@Model.Id" />
+                <div class="input-group mb-3" style="max-width: 200px;">
+                    <input type="number" name="quantity" class="form-control" value="1" min="1" max="@Model.Stock" />
+                    <button type="submit" class="btn btn-success" @(Model.Stock <= 0 ? "disabled" : "")>
+                        <i class="bi bi-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </form>
+
+            <a asp-action="EditProduct" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
         </div>
     </div>
 </div>
