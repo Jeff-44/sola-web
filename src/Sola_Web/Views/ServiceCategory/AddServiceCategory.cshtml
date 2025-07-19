@@ -1,41 +1,38 @@
-﻿@model ApplicationCore.Models.ServiceCategory
+@model ApplicationCore.Models.ServiceCategory
 
 @{
     ViewData["Title"] = "Service Category";
 }
 
-
-
-<div class="container my-5">
-    <!--astuce pour eviter les chevauchement-->
-    <h1>Service Category</h1>
-
-    <h4>ServiceCategory</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="AddServiceCategory">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm gradient-card">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4 fw-semibold text-dark">Ajouter une Catégorie</h2>
+                    <form asp-action="AddServiceCategory">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label"></label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
+                <div class="card-footer text-center">
+                    <a asp-action="Index" class="text-decoration-none return-link">Retour</a>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
+            </div>
         </div>
     </div>
-
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div><h1>Index</h1>
 </div>
 
 @section Scripts {
