@@ -2,7 +2,7 @@ using ApplicationCore.Interfaces.IRepository;
 using ApplicationCore.Models;
 using Infrastructure.Data;
 
-namespace Infrastructure.Repositories
+namespace Infrastructure.Implementations.Repositories
 {
     public class ProductRepository : GenericRepository<Product>, IProductRepository
     {

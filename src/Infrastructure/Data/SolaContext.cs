@@ -21,6 +21,7 @@ namespace Infrastructure.Data
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
         //public DbSet<Inquiry> Inquiries { get; set; }
 
     }

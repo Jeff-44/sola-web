@@ -1,0 +1,49 @@
+@model IEnumerable<ApplicationCore.Models.CartItem>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Order Summary</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f5f5f5; }
+        .total { margin-top: 20px; text-align: right; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Order Summary</h2>
+        <p>Order Date: @DateTime.Now.ToString("MM/dd/yyyy HH:mm")</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td>@item.UnitPrice.ToString("C")</td>
+                        <td>@item.Quantity</td>
+                        <td>@((item.Quantity * item.UnitPrice).ToString("C"))</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="total">
+            Total Amount: @Model.Sum(i => i.Quantity * i.UnitPrice).ToString("C")
+        </div>
+    </div>
+</body>
+</html>

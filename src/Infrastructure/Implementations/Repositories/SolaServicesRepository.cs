@@ -3,7 +3,7 @@ using ApplicationCore.Interfaces.IRepository;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repositories
+namespace Infrastructure.Implementations.Repositories
 {
     public class SolaServicesRepository : GenericRepository<Service>, ISolaServicesRepository
     {

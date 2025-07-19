@@ -3,7 +3,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace Infrastructure.Repositories
+namespace Infrastructure.Implementations.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
