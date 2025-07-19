@@ -7,10 +7,12 @@ namespace Infrastructure.Services
     public class CartService : ICartService
     {
         private readonly ICartRepository _cartRepository;
+        private readonly IProductService _productService;
 
-        public CartService(ICartRepository cartRepository)
+        public CartService(ICartRepository cartRepository, IProductService productService)
         {
             _cartRepository = cartRepository;
+            _productService = productService;
         }
 
         public async Task<IEnumerable<CartItem>> GetCartItemsAsync(string cartId)
@@ -20,6 +22,13 @@ namespace Infrastructure.Services
 
         public async Task<CartItem> AddToCartAsync(string cartId, int productId, int quantity)
         {
+            var product = await _productService.GetProductByIdAsync(productId);
+            if (product == null)
+                throw new InvalidOperationException($"Product with ID {productId} not found.");
+
+            if (product.Stock < quantity)
+                throw new InvalidOperationException($"Not enough stock. Available: {product.Stock}");
+
             var cartItem = await _cartRepository.GetCartItemAsync(cartId, productId);
             if (cartItem == null)
             {
@@ -28,12 +37,17 @@ namespace Infrastructure.Services
                     CartId = cartId,
                     ProductId = productId,
                     Quantity = quantity,
-                    DateCreated = DateTime.UtcNow
+                    UnitPrice = product.Price,
+                    DateCreated = DateTime.UtcNow,
+                    Product = product
                 };
                 await _cartRepository.AddAsync(cartItem);
             }
             else
             {
+                if (product.Stock < cartItem.Quantity + quantity)
+                    throw new InvalidOperationException($"Not enough stock. Available: {product.Stock}");
+
                 cartItem.Quantity += quantity;
                 await _cartRepository.UpdateAsync(cartItem);
             }
@@ -43,12 +57,23 @@ namespace Infrastructure.Services
 
         public async Task<CartItem> UpdateCartItemAsync(string cartId, int productId, int quantity)
         {
+            if (quantity <= 0)
+                throw new ArgumentException("Quantity must be greater than zero.");
+
+            var product = await _productService.GetProductByIdAsync(productId);
+            if (product == null)
+                throw new InvalidOperationException($"Product with ID {productId} not found.");
+
+            if (product.Stock < quantity)
+                throw new InvalidOperationException($"Not enough stock. Available: {product.Stock}");
+
             var cartItem = await _cartRepository.GetCartItemAsync(cartId, productId);
-            if (cartItem != null)
-            {
-                cartItem.Quantity = quantity;
-                await _cartRepository.UpdateAsync(cartItem);
-            }
+            if (cartItem == null)
+                throw new InvalidOperationException($"Cart item not found.");
+
+            cartItem.Quantity = quantity;
+            cartItem.UnitPrice = product.Price; // Update price in case it changed
+            await _cartRepository.UpdateAsync(cartItem);
 
             return cartItem;
         }

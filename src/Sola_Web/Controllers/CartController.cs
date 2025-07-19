@@ -47,13 +47,15 @@ namespace Sola_Web.Controllers
         public async Task<IActionResult> AddToCart(int productId, int quantity = 1)
         {
             var cartId = GetOrCreateCartId();
-            var product = await _productService.GetProductByIdAsync(productId);
-            
-            if (product == null)
-                return NotFound();
-
-            await _cartService.AddToCartAsync(cartId, productId, quantity);
-            
+            try
+            {
+                await _cartService.AddToCartAsync(cartId, productId, quantity);
+                TempData["SuccessMessage"] = "Product added to cart!";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+            }
             return RedirectToAction(nameof(Index));
         }
 
@@ -61,16 +63,23 @@ namespace Sola_Web.Controllers
         public async Task<IActionResult> UpdateQuantity(int productId, int quantity)
         {
             var cartId = GetOrCreateCartId();
-            
-            if (quantity <= 0)
+            try
             {
-                await _cartService.RemoveFromCartAsync(cartId, productId);
+                if (quantity == 0)
+                {
+                    await _cartService.RemoveFromCartAsync(cartId, productId);
+                    TempData["SuccessMessage"] = "Product removed from cart!";
+                }
+                else
+                {
+                    await _cartService.UpdateCartItemAsync(cartId, productId, quantity);
+                    TempData["SuccessMessage"] = "Cart updated successfully!";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await _cartService.UpdateCartItemAsync(cartId, productId, quantity);
+                TempData["ErrorMessage"] = ex.Message;
             }
-
             return RedirectToAction(nameof(Index));
         }
 
@@ -87,8 +96,15 @@ namespace Sola_Web.Controllers
         public async Task<IActionResult> ClearCart()
         {
             var cartId = GetOrCreateCartId();
-            await _cartService.ClearCartAsync(cartId);
-            
+            try
+            {
+                await _cartService.ClearCartAsync(cartId);
+                TempData["SuccessMessage"] = "Cart cleared successfully!";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+            }
             return RedirectToAction(nameof(Index));
         }
 

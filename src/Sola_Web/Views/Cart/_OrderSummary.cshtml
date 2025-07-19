@@ -6,43 +6,130 @@
     <meta charset="utf-8" />
     <title>Order Summary</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .container { padding: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
-        th { background-color: #f5f5f5; }
-        .total { margin-top: 20px; text-align: right; font-weight: bold; }
+        body { 
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container { 
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+        .order-info {
+            margin-bottom: 30px;
+            color: #666;
+        }
+        table { 
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+        }
+        th {
+            background-color: #f8f9fa;
+            color: #495057;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+        th, td { 
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .total-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+            color: #000;
+        }
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Order Summary</h2>
-        <p>Order Date: @DateTime.Now.ToString("MM/dd/yyyy HH:mm")</p>
+        <div class="header">
+            <h1>Order Summary</h1>
+            <p>Thank you for your order!</p>
+        </div>
+
+        <div class="order-info">
+            <p><strong>Order Date:</strong> @DateTime.UtcNow.ToString("MM/dd/yyyy HH:mm")</p>
+            <p><strong>Order Reference:</strong> @Guid.NewGuid().ToString().Substring(0, 8).ToUpper()</p>
+        </div>
 
         <table>
             <thead>
                 <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
+                    <th style="width: 40%;">Product</th>
+                    <th style="width: 20%;">Unit Price</th>
+                    <th style="width: 20%;">Quantity</th>
+                    <th style="width: 20%;" class="text-right">Total</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.Product.Name</td>
+                        <td>
+                            <strong>@item.Product.Name</strong>
+                            @if (!string.IsNullOrEmpty(item.Product.Description))
+                            {
+                                <br />
+                                <small>@item.Product.Description</small>
+                            }
+                        </td>
                         <td>@item.UnitPrice.ToString("C")</td>
                         <td>@item.Quantity</td>
-                        <td>@((item.Quantity * item.UnitPrice).ToString("C"))</td>
+                        <td class="text-right"><strong>@item.TotalPrice.ToString("C")</strong></td>
                     </tr>
                 }
             </tbody>
         </table>
 
-        <div class="total">
-            Total Amount: @Model.Sum(i => i.Quantity * i.UnitPrice).ToString("C")
+        <div class="total-section">
+            <table>
+                <tr>
+                    <td><strong>Subtotal:</strong></td>
+                    <td class="text-right">@Model.Sum(i => i.TotalPrice).ToString("C")</td>
+                </tr>
+                @{ var tax = Model.Sum(i => i.TotalPrice) * 0.1m; } @* Example 10% tax *@
+                <tr>
+                    <td><strong>Tax (10%):</strong></td>
+                    <td class="text-right">@tax.ToString("C")</td>
+                </tr>
+                <tr>
+                    <td><strong>Total:</strong></td>
+                    <td class="text-right"><strong>@((Model.Sum(i => i.TotalPrice) + tax).ToString("C"))</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>Thank you for shopping with us! If you have any questions about your order, please contact our customer service.</p>
+            <p>This is a computer-generated document and does not require a signature.</p>
         </div>
     </div>
 </body>

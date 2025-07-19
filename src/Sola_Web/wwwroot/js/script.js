@@ -1,13 +1,17 @@
 ﻿
         // JavaScript pour le site
 
-    // Menu mobile
+// Menu mobile
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
+    const authLinks = document.querySelector('.auth-links');
         
-        mobileMenuBtn.addEventListener('click', () => {
+    mobileMenuBtn.addEventListener('click', () => {
         navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        });
+        if (authLinks) {
+            authLinks.style.display = navLinks.style.display;
+        }
+    });
 
     // Animation au défilement
     const fadeElements = document.querySelectorAll('.fade-in');
