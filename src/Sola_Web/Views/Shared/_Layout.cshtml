@@ -4,100 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Sola | Solutions Énergétiques Intelligentes </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6EP7dUF4k5w9L8P1kzKp4YL0R38OkykfIoVyaFqzE+/2"
-          crossorigin="anonymous" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/auth.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Sola_Web.styles.css" asp-append-version="true" />
 
-    <style>
-        /* Styles additionnels */
-        .auth-links {
-            display: flex;
-            align-items: center;
-            margin-left: auto;
-        }
-
-        .auth-links .navbar-nav {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 1rem;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .auth-links .nav-item {
-            margin: 0;
-        }
-
-        .auth-links .nav-link {
-            color: #333;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 0.25rem;
-            transition: all 0.3s ease;
-        }
-
-        .auth-links .nav-link:hover {
-            background-color: #f8f9fa;
-        }
-
-        .auth-links .btn-link {
-            border: none;
-            background: none;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-        }
-
-        .auth-links i {
-            margin-right: 0.5rem;
-        }
-
-        @@media (max-width: 768px) {
-            .auth-links {
-                margin-top: 1rem;
-                width: 100%;
-            }
-
-            .auth-links .navbar-nav {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .auth-links .nav-item {
-                width: 100%;
-                text-align: center;
-            }
-        }
-
-        #services .card {
-            border: none;
-            border-radius: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-            #services .card:hover {
-                transform: translateY(-5px);
-            }
-
-        #services .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #004d40; /* Vert solaire */
-        }
-
-        #services .card-text {
-            color: #555;
-        }
-
-    </style>
 </head>
 <body>
     <header>
@@ -178,24 +91,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/script.js" asp-append-version="true"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-QJHtvGhmr9bInh+JxyYkF0/uENPmrpsbR9yZrOb6F5q3zZ3GTQUJM0yK8sct7P20" crossorigin="anonymous"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-
-
-
-
-
-
-    
-    
-
-    
-
-    
-
-    
-
-    
-
