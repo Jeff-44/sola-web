@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Sola_Web.Services;
+using Sola_Web.Helpers;
+using System.Runtime.InteropServices;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionstring = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -24,6 +26,24 @@ builder.Services.AddDbContext<SolaContext>(options =>
 
 builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<SolaContext>();
+
+string nativeLibPath;
+
+if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+{
+    nativeLibPath = Path.Combine(Directory.GetCurrentDirectory(), "runtimes", "win-x64", "native", "libwkhtmltox.dll");
+}
+else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+{
+    nativeLibPath = Path.Combine(Directory.GetCurrentDirectory(), "runtimes", "linux-x64", "native", "libwkhtmltox.so");
+}
+else
+{
+    throw new PlatformNotSupportedException("Only Windows and Linux are supported.");
+}
+
+// Load native wkhtmltopdf library before using DinkToPdf
+NativeLibraryLoader.Load(nativeLibPath);
 
 
 // Register repositories
