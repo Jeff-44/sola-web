@@ -3,8 +3,7 @@ using ApplicationCore.Interfaces.IServices;
 using ApplicationCore.Models;
 using ApplicationCore.Settings;
 using ApplicationCore.Utils;
-using DinkToPdf;
-using DinkToPdf.Contracts;
+using OpenHtmlToPdf;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
@@ -12,7 +11,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Sola_Web.Services;
-using System.Runtime.InteropServices;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionstring = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -27,21 +25,6 @@ builder.Services.AddDbContext<SolaContext>(options =>
 builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<SolaContext>();
 
-string nativeLibPath;
-
-if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-{
-    nativeLibPath = Path.Combine(Directory.GetCurrentDirectory(), "runtimes", "win-x64", "native", "libwkhtmltox.dll");
-}
-else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-{
-    nativeLibPath = Path.Combine(Directory.GetCurrentDirectory(), "runtimes", "linux-x64", "native", "libwkhtmltox.so");
-}
-else
-{
-    throw new PlatformNotSupportedException("Only Windows and Linux are supported.");
-}
-
 
 // Register repositories
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -54,8 +37,7 @@ builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IServiceCategoryService, ServiceCategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IImageService, ImageService>();
-builder.Services.AddSingleton<IConverter>(new SynchronizedConverter(new PdfTools()));
-builder.Services.AddScoped<IPdfService, HtmlToPdfService>();
+builder.Services.AddScoped<IPdfService, OpenHtmlToPdfService>();
 builder.Services.AddScoped<IViewRenderService, ViewRenderService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
