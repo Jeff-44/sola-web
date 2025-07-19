@@ -19,6 +19,10 @@
             color: var(--dark);
             line-height: 1.6;
         }
+
+        main {
+            padding-top: 70px;
+        }
         
         /* Header */
         header {
