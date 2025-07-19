@@ -18,8 +18,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
     <PackageReference Include="MimeKit" Version="4.13.0" />
-    <PackageReference Include="DinkToPdf.Native.Win64" Version="1.0.8" />
-    <PackageReference Include="DinkToPdf.Native.Linux64" Version="1.0.8" />
   </ItemGroup>
 
 <ItemGroup>
