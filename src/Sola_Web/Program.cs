@@ -42,8 +42,6 @@ else
     throw new PlatformNotSupportedException("Only Windows and Linux are supported.");
 }
 
-var context = new CustomAssemblyLoadContext();
-context.LoadUnmanagedLibrary(nativeLibPath);
 
 
 // Register repositories
@@ -78,10 +76,10 @@ if (!app.Environment.IsDevelopment())
 using (var scope = app.Services.CreateScope()) 
 {
     var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<SolaContext>();
+    var _context = services.GetRequiredService<SolaContext>();
     //context.Database.EnsureDeleted();
     //context.Database.EnsureCreated();
-    context.Database.Migrate();
+    _context.Database.Migrate();
 }
 
 app.UseHttpsRedirection();
