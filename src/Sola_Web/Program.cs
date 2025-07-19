@@ -12,8 +12,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Sola_Web.Services;
-using Sola_Web.Utils;
-using System.IO;
 using System.Runtime.InteropServices;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,7 +27,6 @@ builder.Services.AddDbContext<SolaContext>(options =>
 builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<SolaContext>();
 
-var loadContext = new CustomAssemblyLoadContext();
 string nativeLibPath;
 
 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -45,7 +42,6 @@ else
     throw new PlatformNotSupportedException("Only Windows and Linux are supported.");
 }
 
-loadContext.LoadUnmanagedLibrary(nativeLibPath);
 
 // Register repositories
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
