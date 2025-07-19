@@ -1,4 +1,5 @@
 using ApplicationCore.Interfaces.IServices;
+using Chilkat;
 using OpenHtmlToPdf;
 
 namespace Infrastructure.Services
