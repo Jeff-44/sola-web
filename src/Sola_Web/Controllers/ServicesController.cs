@@ -4,6 +4,7 @@ using Sola_Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sola_Web.Controllers
 {
@@ -33,6 +34,7 @@ namespace Sola_Web.Controllers
             return View(services);
         }
 
+        [Authorize]
         [HttpGet(Name = "Create")]
         public async Task<IActionResult> AddService()
         {
@@ -41,6 +43,7 @@ namespace Sola_Web.Controllers
             return View(new ServiceViewModel());
         }
 
+        [Authorize]
         [HttpPost(Name = "Create")]
         public async Task<IActionResult> AddService(ServiceViewModel model)
         {
@@ -66,6 +69,7 @@ namespace Sola_Web.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> EditService(int id)
         {
@@ -90,6 +94,7 @@ namespace Sola_Web.Controllers
             return View(serviceVM);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> EditService(ServiceViewModel model)
         {
@@ -117,6 +122,7 @@ namespace Sola_Web.Controllers
             return View(model);
         }
 
+        [Authorize]
         public async Task<IActionResult> DeleteService(int id)
         {
             await _service.DeleteServiceAsync(id);
