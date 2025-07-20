@@ -44,7 +44,7 @@ namespace Sola_Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToCart(int productId, int quantity = 1)
+        public async Task<IActionResult> AddToCart(int productId, int quantity = 1, string? returnUrl = null)
         {
             var cartId = GetOrCreateCartId();
             try
@@ -55,6 +55,10 @@ namespace Sola_Web.Controllers
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] = ex.Message;
+            }
+            if (!string.IsNullOrEmpty(returnUrl))
+            {
+                return LocalRedirect(returnUrl);
             }
             return RedirectToAction(nameof(Index));
         }
