@@ -102,7 +102,28 @@ body {
     font-weight: 700;
     color: var(--secondary-color);
     text-decoration: none;
+    position: relative;
+    transition: var(--transition);
 }
+
+    .logo:hover {
+        color: var(--primary-color);
+    }
+
+    .logo::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--primary-color);
+        transition: var(--transition);
+    }
+
+    .logo:hover::after {
+        width: 100%;
+    }
 
     .logo span {
         color: var(--primary-color);
