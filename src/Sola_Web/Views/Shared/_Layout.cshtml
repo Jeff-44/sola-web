@@ -30,6 +30,8 @@
                 <a asp-action="Index" asp-controller="About">À propos</a>
                 <a asp-action="Index" asp-controller="Contact">Contact</a>
 
+                @await Component.InvokeAsync("CartSummary")
+
                 <div class="auth-links ms-auto">
                     <partial name="_LoginPartial" />
                 </div>
