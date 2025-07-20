@@ -1,6 +1,7 @@
 using ApplicationCore.Interfaces.IServices;
 using ApplicationCore.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Sola_Web.ViewModels;
 
 namespace Sola_Web.Controllers
@@ -22,12 +23,14 @@ namespace Sola_Web.Controllers
             return View(products);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult AddProduct()
         {
             return View(new ProductViewModel());
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddProduct(ProductViewModel model)
         {
@@ -52,6 +55,7 @@ namespace Sola_Web.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> EditProduct(int id)
         {
@@ -72,6 +76,7 @@ namespace Sola_Web.Controllers
             return View(vm);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> EditProduct(ProductViewModel model)
         {
@@ -96,6 +101,7 @@ namespace Sola_Web.Controllers
             return View(model);
         }
 
+        [Authorize]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             await _productService.DeleteProductAsync(id);
