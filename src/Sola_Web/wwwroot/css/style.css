@@ -487,6 +487,15 @@
     margin-right: 0.5rem;
 }
 
+.cart-link {
+    color: var(--dark);
+    margin-left: 1rem;
+}
+
+.cart-link .cart-count {
+    font-size: 0.75rem;
+}
+
 @media (max-width: 768px) {
     .auth-links {
         margin-top: 1rem;
