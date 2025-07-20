@@ -7,7 +7,10 @@
 <div class="container my-5">
     <h1>Products</h1>
     <p>
-        <a asp-action="AddProduct" class="btn btn-primary">Create New</a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-action="AddProduct" class="btn btn-primary">Create New</a>
+        }
     </p>
     <div class="row g-4">
         @foreach (var item in Model)
@@ -21,9 +24,15 @@
                         <p class="card-text fw-bold">Price: @item.Price.ToString("C")</p>
                         <p class="card-text">Stock: @(item.Stock > 0 ? "In Stock" : "Out of Stock")</p>
                         <div class="mt-auto">
-                            <a asp-action="EditProduct" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a asp-action="EditProduct" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
+                            }
                             <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
-                            <a asp-action="DeleteProduct" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a asp-action="DeleteProduct" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                            }
                         </div>
                     </div>
                 </div>
