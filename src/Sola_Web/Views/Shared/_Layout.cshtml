@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿@* <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
@@ -8,10 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/auth.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Sola_Web.styles.css" asp-append-version="true" />
-
 </head>
 <body>
     <header>
@@ -70,8 +66,6 @@
                     <li><a asp-action="Index" asp-controller="ServiceCategory">Catégories</a></li>
                     <li><a asp-action="Index" asp-controller="Products">Produits</a></li>
                     <li><a asp-action="Create" asp-controller="Invoice">Proforma</a></li>
-                   @*  <li><a href="#about">À propos</a></li> *@
-                    @* <li><a href="#order">Commander</a></li> *@
                     <li><a asp-action="Index" asp-controller="Contact">Contact</a></li>
                 </ul>
             </div>
@@ -79,7 +73,7 @@
             <div class="footer-column">
                 <h3>Contact</h3>
                 <ul>
-                   @*  <li><i class="fas fa-map-marker-alt"></i> 123 Rue de l'Énergie, Port-au-Prince</li> *@
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Rue de l'Énergie, Port-au-Prince</li>
                     <li><i class="fas fa-phone"></i> +509 4025 4683 | +509 3756 2506</li>
                     <li><i class="fas fa-envelope"></i> contact@Sola.ht</li>
                     <li><i class="fas fa-clock"></i> Lundi-Vendredi: 8h-17h</li>
@@ -96,5 +90,99 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/script.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+ *@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sola - Énergie Renouvelable</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" /> @*Tres importent*@
+    @* <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" /> A ne pas prendre*@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="~/css/style2.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a asp-action="Index" asp-controller="Home" class="logo">Sola</a>
+                <ul class="nav-links">
+                <li><a asp-action="Index" asp-controller="Home">Accueil</a></li>
+                <li><a asp-action="Index" asp-controller="Services">Services</a></li>
+                <li><a asp-action="Index" asp-controller="ServiceCategory">Catégories</a></li>
+                <li><a asp-action="Index" asp-controller="Products">Produits</a></li>
+                <li><a asp-action="Create" asp-controller="Invoice">Proforma</a></li>
+                <li><a asp-action="Index" asp-controller="About">À propos</a></li>
+                <li><a asp-action="Index" asp-controller="Contact">Contact</a></li>
+                <li>@await Component.InvokeAsync("CartSummary")</li>
+                <partial name="_LoginPartial" />
+                </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="menu-btn">
+                <div class="menu-btn__burger"></div>
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="">
+        <main role="main" class="">
+            @RenderBody()
+        </main>
+    </div>
+    
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Sola</h3>
+                    <p>Leader en solutions solaires en Haïti depuis 2010. Nous nous engageons à fournir des systèmes énergétiques durables et abordables.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Liens Rapides</h3>
+                    <ul>
+                        <li><a href="#home">Accueil</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#team">Équipe</a></li>
+                        <li><a href="#testimonials">Témoignages</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Installation Résidentielle</a></li>
+                        <li><a href="#">Solutions Commerciales</a></li>
+                        <li><a href="#">Stockage d'Énergie</a></li>
+                        <li><a href="#">Maintenance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Abonnez-vous pour recevoir nos dernières offres et actualités.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Votre Email">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sola. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/script.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/js/script2.js"></script>
 </body>
 </html>

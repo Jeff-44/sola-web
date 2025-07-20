@@ -3,108 +3,44 @@
     ViewData["Title"] = "Accueil";
 }
     <!-- Hero Section HOME -->
+<!-- Hero Slider (3 slides) -->
 <section class="hero" id="home">
-    <div class="hero-content fade-in">
-        <h2>Énergie Solaire pour un Avenir Durable</h2>
-        <p>Découvrez nos solutions solaires haut de gamme pour réduire votre facture énergétique tout en protégeant l'environnement.</p>
-        <a href="#services" class="btn btn-primary">Voir nos services</a>
-    </div>
-</section>
-@* <section id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-    <!-- Indicators -->
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Installation Clé en Main"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Maintenance & Réparation"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Audit Énergétique"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Suivi & Monitoring"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="4" aria-label="Formation & Sensibilisation"></button>
-    </div>
-
-    <div class="carousel-inner">
+    <div class="slider">
         <!-- Slide 1 -->
-        <div class="carousel-item carousel-item-1 active">
-            <div class="carousel-caption">
-                <h2>Installation Clé en Main</h2>
-                <p>De l'étude de site à la mise en service, nos experts assurent une installation rapide et durable.</p>
-                <a href="#services" class="btn btn-primary">En savoir plus</a>
+        <div class="slide active">
+            <div class="container">
+                <h1>Énergie Solaire pour un Avenir Meilleur</h1>
+                <p>Découvrez nos solutions solaires innovantes pour votre maison ou entreprise</p>
+                <a href="#contact" class="btn">Demander un Devis</a>
             </div>
         </div>
+
         <!-- Slide 2 -->
-        <div class="carousel-item carousel-item-2">
-            <div class="carousel-caption">
-                <h2>Maintenance & Réparation</h2>
-                <p>Surveillance continue et interventions rapides pour optimiser la performance de vos panneaux.</p>
-                <a href="#services" class="btn btn-primary">En savoir plus</a>
+        <div class="slide">
+            <div class="container">
+                <h1>Économisez sur vos Factures d'Électricité</h1>
+                <p>Jusqu'à 70% d'économie avec nos systèmes solaires performants</p>
+                <a href="#services" class="btn">Nos Services</a>
             </div>
         </div>
+
         <!-- Slide 3 -->
-        <div class="carousel-item carousel-item-3">
-            <div class="carousel-caption">
-                <h2>Audit Énergétique</h2>
-                <p>Analyse complète de votre consommation avec recommandations pour réduire votre facture.</p>
-                <a href="#services" class="btn btn-primary">En savoir plus</a>
-            </div>
-        </div>
-        <!-- Slide 4 -->
-        <div class="carousel-item carousel-item-4">
-            <div class="carousel-caption">
-                <h2>Suivi & Monitoring</h2>
-                <p>Accédez à votre plateforme en temps réel pour suivre la production et recevoir des alertes.</p>
-                <a href="#services" class="btn btn-primary">En savoir plus</a>
-            </div>
-        </div>
-        <!-- Slide 5 -->
-        <div class="carousel-item carousel-item-5">
-            <div class="carousel-caption">
-                <h2>Formation & Sensibilisation</h2>
-                <p>Ateliers pédagogiques pour vos équipes sur l'exploitation et l'entretien des systèmes solaires.</p>
-                <a href="#services" class="btn btn-primary">En savoir plus</a>
+        <div class="slide">
+            <div class="container">
+                <h1>Installation Professionnelle</h1>
+                <p>Notre équipe certifiée assure une installation rapide et sans tracas</p>
+                <a href="#team" class="btn">Notre Équipe</a>
             </div>
         </div>
     </div>
-
-    <!-- Controls -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Précédent</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Suivant</span>
-    </button>
-</section> *@
-
-
-<!-- Features Section HOME-->
-<section class="section" id="about">
-    <div class="section-title">
-        <h2>Pourquoi choisir Sola?</h2>
-        <p>Nous offrons les meilleures solutions énergétiques pour votre maison ou entreprise</p>
-    </div>
-
-    <div class="features-grid">
-        <div class="feature-card fade-in">
-            <i class="fas fa-bolt"></i>
-            <h3>Haute Efficacité</h3>
-            <p>Nos panneaux solaires offrent un rendement énergétique supérieur à 22%, parmi les meilleurs du marché.</p>
-        </div>
-
-        <div class="feature-card fade-in">
-            <i class="fas fa-shield-alt"></i>
-            <h3>Garantie 25 ans</h3>
-            <p>Nos produits sont couverts par une garantie exceptionnelle de 25 ans sur la performance et les défauts.</p>
-        </div>
-
-        <div class="feature-card fade-in">
-            <i class="fas fa-leaf"></i>
-            <h3>Écologique</h3>
-            <p>Réduisez votre empreinte carbone avec une énergie 100% propre et renouvelable.</p>
-        </div>
+    <div class="slider-nav">
+        <button class="prev"><i class="fas fa-chevron-left"></i></button>
+        <div class="dots"></div>
+        <button class="next"><i class="fas fa-chevron-right"></i></button>
     </div>
 </section>
-
-<!-- Inclure Bootstrap CSS -->
-<section id="services" class="py-5 bg-light">
+<!-- Integration des services de facon dynamique -->
+@* <section id="services" class="py-5 bg-light">
     <div class="container">
         <h2 class="text-center mb-5">Nos Services</h2>
         <div class="row g-4">
@@ -124,122 +60,188 @@
 
         </div>
     </div>
+</section> *@
+<!-- Services Section -->
+<section class="services" id="services">
+    <div class="container">
+        <h2 class="section-title">Nos Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-solar-panel"></i>
+                <h3>Installation Résidentielle</h3>
+                <p>Solutions solaires sur mesure pour les maisons individuelles et les copropriétés.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-industry"></i>
+                <h3>Solutions Commerciales</h3>
+                <p>Systèmes solaires pour entreprises avec retour sur investissement rapide.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-battery-full"></i>
+                <h3>Stockage d'Énergie</h3>
+                <p>Batteries haute performance pour maximiser votre autonomie énergétique.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-tools"></i>
+                <h3>Maintenance</h3>
+                <p>Services d'entretien et de réparation pour garantir des performances optimales.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
-
-
-<!-- Products Section -->
-@* <section class="section bg-light" id="products">
-    <div class="section-title">
-        <h2>Nos Produits</h2>
-        <p>Découvrez notre gamme de panneaux solaires haute performance</p>
-    </div>
-
-    <div class="products-grid">
-        <!-- Produit 1 -->
-        <div class="product-card fade-in">
-            <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Panneau solaire premium" class="product-img">
-            <div class="product-info">
-                <h3>Sola Premium 400W</h3>
-                <div class="price">$299.99</div>
-                <div class="specs">
-                    <span>400W</span>
-                    <span>22.5% efficacité</span>
+<!-- Team Section -->
+<section class="team" id="team">
+    <div class="container">
+        <h2 class="section-title">Notre Équipe</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="~/images/team/member1.jpg" alt="Joseph Jeff FORESTAL">
+                <h3>Joseph Jeff FORESTAL</h3>
+                <p>Web Develeppeur | .Net Stack</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
                 </div>
-                <p>Notre panneau le plus performant avec technologie monocristalline et résistance aux intempéries.</p>
-                <a href="#order" class="btn" style="margin-top: 1rem;">Commander</a>
             </div>
-        </div>
-
-        <!-- Produit 2 -->
-        <div class="product-card fade-in">
-            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Panneau solaire résidentiel" class="product-img">
-            <div class="product-info">
-                <h3>Sola Home 350W</h3>
-                <div class="price">$249.99</div>
-                <div class="specs">
-                    <span>350W</span>
-                    <span>20% efficacité</span>
+            <div class="team-member">
+                <img src="images/team2.jpg" alt="Marie Lambert">
+                <h3>Marie Lambert</h3>
+                <p>Chef de Projet</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
                 </div>
-                <p>Solution idéale pour les maisons avec un excellent rapport qualité-prix et installation facile.</p>
-                <a href="#order" class="btn" style="margin-top: 1rem;">Commander</a>
             </div>
-        </div>
-
-        <!-- Produit 3 -->
-        <div class="product-card fade-in">
-            <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Panneau solaire commercial" class="product-img">
-            <div class="product-info">
-                <h3>Sola Pro 450W</h3>
-                <div class="price">$349.99</div>
-                <div class="specs">
-                    <span>450W</span>
-                    <span>23% efficacité</span>
+            <div class="team-member">
+                <img src="images/team3.jpg" alt="Paul Richard">
+                <h3>Paul Richard</h3>
+                <p>Technicien Installateur</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
                 </div>
-                <p>Conçu pour les applications commerciales avec une durabilité et performance exceptionnelles.</p>
-                <a href="#order" class="btn" style="margin-top: 1rem;">Commander</a>
+            </div>
+            <div class="team-member">
+                <img src="images/team4.jpg" alt="Sophie Martin">
+                <h3>Sophie Martin</h3>
+                <p>Conseillère Clientèle</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
             </div>
         </div>
     </div>
-</section> *@
+</section>
 
-@* <!-- Order Section -->
-<section class="section" id="order">
-    <div class="section-title">
-        <h2>Passer Commande</h2>
-        <p>Remplissez ce formulaire et nous vous contacterons pour finaliser votre commande</p>
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <h2 class="section-title">Témoignages</h2>
+        <div class="testimonials-slider">
+            <div class="testimonial active">
+                <div class="quote">
+                    <i class="fas fa-quote-left"></i>
+                    <p>Après l'installation de panneaux solaires par PanoSolaire, ma facture d'électricité a baissé de 60%. Le service était professionnel du début à la fin.</p>
+                    <div class="author">
+                        <img src="images/client1.jpg" alt="Client 1">
+                        <div class="info">
+                            <h4>Marc Antoine</h4>
+                            <p>Propriétaire, Port-au-Prince</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="quote">
+                    <i class="fas fa-quote-left"></i>
+                    <p>Nous avons équipé notre entreprise avec un système solaire complet. En 18 mois, l'investissement était amorti. Je recommande vivement!</p>
+                    <div class="author">
+                        <img src="images/client2.jpg" alt="Client 2">
+                        <div class="info">
+                            <h4>Sarah Jean</h4>
+                            <p>Gérante, Cap-Haïtien</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="quote">
+                    <i class="fas fa-quote-left"></i>
+                    <p>L'équipe a été très professionnelle et a respecté les délais. Notre système fonctionne parfaitement même pendant les coupures de courant.</p>
+                    <div class="author">
+                        <img src="images/client3.jpg" alt="Client 3">
+                        <div class="info">
+                            <h4>Pierre Louis</h4>
+                            <p>Directeur d'école, Jacmel</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonials-nav">
+            <button class="prev"><i class="fas fa-chevron-left"></i></button>
+            <div class="dots"></div>
+            <button class="next"><i class="fas fa-chevron-right"></i></button>
+        </div>
     </div>
+</section>
 
-    <form class="order-form fade-in" id="orderForm">
-        <div class="form-row">
-            <div class="form-group">
-                <label for="firstName">Prénom</label>
-                <input type="text" id="firstName" required>
+<!-- Contact Section -->
+<section class="contact" id="contact">
+    <div class="container">
+        <h2 class="section-title">Contactez-Nous</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Informations de Contact</h3>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>123 Avenue Christophe, Port-au-Prince, Haïti</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <p>+509 34 56 7890</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>info@panosolaire.ht</p>
+                </div>
+                <div class="social-media">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="lastName">Nom</label>
-                <input type="text" id="lastName" required>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Votre Nom" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Votre Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="phone" placeholder="Votre Téléphone">
+                    </div>
+                    <div class="form-group">
+                        <select id="service" required>
+                            <option value="">Service Intéressé</option>
+                            <option value="residential">Installation Résidentielle</option>
+                            <option value="commercial">Solutions Commerciales</option>
+                            <option value="storage">Stockage d'Énergie</option>
+                            <option value="maintenance">Maintenance</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" rows="5" placeholder="Votre Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Envoyer le Message</button>
+                </form>
             </div>
         </div>
-
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" required>
-        </div>
-
-        <div class="form-group">
-            <label for="phone">Téléphone</label>
-            <input type="tel" id="phone" required>
-        </div>
-
-        <div class="form-group">
-            <label for="product">Produit souhaité</label>
-            <select id="product" required>
-                <option value="">Sélectionnez un produit</option>
-                <option value="premium">Sola Premium 400W - $299.99</option>
-                <option value="home">Sola Home 350W - $249.99</option>
-                <option value="pro">Sola Pro 450W - $349.99</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="quantity">Quantité</label>
-            <input type="number" id="quantity" min="1" value="1" required>
-        </div>
-
-        <div class="form-group">
-            <label for="address">Adresse de livraison</label>
-            <textarea id="address" rows="3" required></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="message">Message supplémentaire</label>
-            <textarea id="message" rows="3"></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Soumettre la commande</button>
-    </form>
-</section> *@
+    </div>
+</section>
 
    
