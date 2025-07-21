@@ -26,6 +26,5 @@ RUN dotnet publish "./Sola_Web.csproj" -c $BUILD_CONFIGURATION -o /app/publish /
 FROM base AS final
 WORKDIR /app
 ENV ASPNETCORE_URLS=http://+:8080
-ENV LD_LIBRARY_PATH=/app/runtimes/linux-x64/native:$LD_LIBRARY_PATH
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Sola_Web.dll"]
